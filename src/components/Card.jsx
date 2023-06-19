@@ -12,7 +12,7 @@ function Card() {
     { heading: 23, icon: faBolt, color: "blue" },
     { heading: 33, icon: faGift, color: "orange" },
     { heading: 43, icon: faEarthAmericas, color: "green" },
-    { heading: 43, icon: faUserPlus, color: "purple" },
+    { heading: 53, icon: faUserPlus, color: "purple" },
   ];
 
   return (

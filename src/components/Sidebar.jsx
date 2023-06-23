@@ -8,7 +8,6 @@ import {
   BellIcon,
   CalendarIcon,
   ChartPieIcon,
-  Cog6ToothIcon,
   DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
@@ -54,11 +53,7 @@ const navigation = [
     path: "/reports",
   },
 ];
-const teams = [
-  { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-  { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-  { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
-];
+
 const userNavigation = [
   { name: "Your profile", href: "#" },
   { name: "Sign out", href: "#" },
@@ -70,7 +65,6 @@ function classNames(...classes) {
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [heading, setHeading] = useState();
 
   const style = ({ isActive }) => {
     return {
@@ -151,9 +145,9 @@ export default function Example() {
                       />
                     </div>
                     <nav className="flex flex-1 flex-col ">
-                      <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                      <ul className="flex flex-1 flex-col gap-y-7">
                         <li>
-                          <ul role="list" className="-mx-2 space-y-1">
+                          <ul className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <NavLink
@@ -172,7 +166,7 @@ export default function Example() {
                           </ul>
                         </li>
 
-                        <li className="mt-auto">
+                        {/*     <li className="mt-auto">
                           <a
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
@@ -183,7 +177,7 @@ export default function Example() {
                             />
                             Settings
                           </a>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -208,9 +202,9 @@ export default function Example() {
               </h1>
             </div>
             <nav className="flex flex-1 flex-col mt-5">
-              <ul role="list" className="flex flex-1 flex-col gap-y-7">
+              <ul className="flex flex-1 flex-col gap-y-7">
                 <li>
-                  <ul role="list" className="-mx-2 space-y-1">
+                  <ul className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
                         <NavLink
@@ -229,7 +223,7 @@ export default function Example() {
                   </ul>
                 </li>
 
-                <li className="mt-auto">
+                {/*  <li className="mt-auto">
                   <a
                     href="#"
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-indigo-200 hover:bg-indigo-700 hover:text-white"
@@ -240,7 +234,7 @@ export default function Example() {
                     />
                     Settings
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>

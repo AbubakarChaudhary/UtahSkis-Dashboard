@@ -3,11 +3,29 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
+const Skeleton = () => (
+  <tr>
+    <td className="py-3 px-3">
+      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-400"></div>
+    </td>
+    <td className="py-3 px-3">
+      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-200"></div>
+    </td>
+    <td className="py-3 px-3">
+      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-400"></div>
+    </td>
+    <td className="py-3 px-3">
+      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-200"></div>
+    </td>
+  </tr>
+);
+
 const Table = () => {
   const itemsPerPage = 10; // Number of items/rows to display per page
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -21,8 +39,10 @@ const Table = () => {
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
       const currentItems = totalItems.slice(indexOfFirstItem, indexOfLastItem);
       setCurrentItems(currentItems);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -54,14 +74,25 @@ const Table = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((row) => (
-                <tr key={row.id}>
-                  <td className="px-6 py-4 border-b">{row.id}</td>
-                  <td className="px-6 py-4 border-b">{row.Vendor}</td>
-                  <td className="px-6 py-4 border-b">{row.TruckName}</td>
-                  <td className="px-6 py-4 border-b">{row.Campaign}</td>
-                </tr>
-              ))}
+              {isLoading ? (
+                <>
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                  <Skeleton />
+                </>
+              ) : (
+                currentItems.map((row) => (
+                  <tr key={row.id}>
+                    <td className="px-6 py-4 border-b">{row.id}</td>
+                    <td className="px-6 py-4 border-b">{row.Vendor}</td>
+                    <td className="px-6 py-4 border-b">{row.TruckName}</td>
+                    <td className="px-6 py-4 border-b">{row.Campaign}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
           {/* Pagination */}

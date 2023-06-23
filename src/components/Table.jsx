@@ -95,35 +95,35 @@ const Table = () => {
               )}
             </tbody>
           </table>
-          {/* Pagination */}
-          <div className="pagination">
-            {/* Previous button */}
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </button>
+        </div>
+        {/* Pagination */}
+        <div className="pagination">
+          {/* Previous button */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </button>
 
-            {/* Page numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={currentPage === page ? "active" : ""}
-              >
-                {page}
-              </button>
-            ))}
-
-            {/* Next button */}
+          {/* Page numbers */}
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
+              key={page}
+              onClick={() => handlePageChange(page)}
+              className={currentPage === page ? "active" : ""}
             >
-              <FontAwesomeIcon icon={faAngleRight} />
+              {page}
             </button>
-          </div>
+          ))}
+
+          {/* Next button */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </button>
         </div>
       </div>
     </>

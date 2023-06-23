@@ -1,21 +1,21 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 const Skeleton = () => (
   <tr>
     <td className="py-3 px-3">
-      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-400"></div>
+      <div className="px-3 py-3 rounded-full animate-pulse bg-gray-400"></div>
     </td>
     <td className="py-3 px-3">
-      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-200"></div>
+      <div className="px-3 py-3 rounded-full animate-pulse bg-gray-200"></div>
     </td>
     <td className="py-3 px-3">
-      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-400"></div>
+      <div className="px-3 py-3 rounded-full animate-pulse bg-gray-400"></div>
     </td>
     <td className="py-3 px-3">
-      <div className="px-3 py-3  rounded-full animate-pulse bg-gray-200"></div>
+      <div className="px-3 py-3 rounded-full animate-pulse bg-gray-200"></div>
     </td>
   </tr>
 );
@@ -27,7 +27,7 @@ const Table = () => {
   const [currentItems, setCurrentItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(
         "https://6471f1e36a9370d5a41adaa8.mockapi.io/drivetable"
@@ -44,11 +44,11 @@ const Table = () => {
       console.log(error);
       setIsLoading(false);
     }
-  };
+  }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [fetchData]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

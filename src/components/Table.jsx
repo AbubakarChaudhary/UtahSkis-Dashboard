@@ -70,14 +70,14 @@ const Table = () => {
 
   return (
     <>
-      <div className="container mx-auto py-8">
+      <div className="mx-auto py-8">
         <div className="text-right">
           <select
             name=""
             id=""
             className="bg-gray-200 text-black py-2 px-4  mb-3 mx-3"
           >
-            <option value="">Select</option>
+            <option value="">Select Category</option>
           </select>
           <input
             type="text"

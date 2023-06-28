@@ -4,7 +4,6 @@ import {
   faBolt,
   faGift,
   faEarthAmericas,
-  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 const SkeletonCard = () => (
@@ -25,7 +24,7 @@ function Card() {
     { heading: 23, icon: faBolt, color: "blue" },
     { heading: 33, icon: faGift, color: "orange" },
     { heading: 43, icon: faEarthAmericas, color: "green" },
-    { heading: 53, icon: faUserPlus, color: "purple" },
+    /* { heading: 53, icon: faUserPlus, color: "purple" }, */
   ];
 
   useEffect(() => {
@@ -39,7 +38,7 @@ function Card() {
     <>
       <div className="flex flex-wrap justify-between">
         {isLoading
-          ? Array.from({ length: 4 }).map((_, id) => <SkeletonCard key={id} />)
+          ? Array.from({ length: 3 }).map((_, id) => <SkeletonCard key={id} />)
           : cardsData.map((data, id) => (
               <div
                 className="border-2 border-black-500 w-64 shadow p-3 mb-3"

@@ -26,6 +26,7 @@ const Table = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchData = useCallback(async () => {
     try {
@@ -33,18 +34,27 @@ const Table = () => {
         "https://6471f1e36a9370d5a41adaa8.mockapi.io/drivetable"
       );
       const totalItems = response.data;
-      const totalPages = Math.ceil(totalItems.length / itemsPerPage);
+      const filteredItems = totalItems.filter((item) =>
+        Object.values(item)
+          .join(" ")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
+      );
+      const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
       setTotalPages(totalPages);
       const indexOfLastItem = currentPage * itemsPerPage;
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-      const currentItems = totalItems.slice(indexOfFirstItem, indexOfLastItem);
+      const currentItems = filteredItems.slice(
+        indexOfFirstItem,
+        indexOfLastItem
+      );
       setCurrentItems(currentItems);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
     }
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, searchQuery]);
 
   useEffect(() => {
     fetchData();
@@ -54,9 +64,29 @@ const Table = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <>
       <div className="container mx-auto py-8">
+        <div className="text-right">
+          <select
+            name=""
+            id=""
+            className="bg-gray-200 text-black py-2 px-4  mb-3 mx-3"
+          >
+            <option value="">Select</option>
+          </select>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search by vendor..."
+            className="p-2 border border-gray-300 rounded mb-3"
+          />
+        </div>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
@@ -106,16 +136,7 @@ const Table = () => {
             <FontAwesomeIcon icon={faAngleLeft} />
           </button>
 
-          {/* Page numbers */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              onClick={() => handlePageChange(page)}
-              className={currentPage === page ? "active" : ""}
-            >
-              {page}
-            </button>
-          ))}
+          <p className="m-2">{currentPage}</p>
 
           {/* Next button */}
           <button
